@@ -1,0 +1,13 @@
+{
+  "name": "data-poisoning-detection",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Dataset security and data poisoning detection interface",
+  "scripts": {
+    "promptfoo": "promptfoo",
+    "promptfoo:version": "promptfoo --version"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.115.0"
+  }
+}
