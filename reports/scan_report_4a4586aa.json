@@ -1,0 +1,21 @@
+{
+  "run_id": "4a4586aa",
+  "timestamp": "2026-06-04T14:36:45.850613Z",
+  "dataset_path": "D:\\game\\PycharmProjects\\pythonProject\\Scaner_posoning\\Scaner_posoning\\Scaner_posoning\\evaluation_harness\\generated_weighted_category_datasets\\banking_support\\dirty_secret_cloud_and_ci_tokens\\dataset.csv",
+  "model_path": "D:\\game\\PycharmProjects\\pythonProject\\prod\\data_poisoning_detection-main\\models\\model.pt",
+  "overall_status": "failed",
+  "results": [
+    {
+      "name": "Dataset Guard: monolith security scan",
+      "category": "sanity",
+      "status": "failed",
+      "passed": false,
+      "details": {
+        "reason": "dataset_guard import failed",
+        "error_type": "ModuleNotFoundError",
+        "error": "No module named 'src.scanners.sanity.dataset_quard'"
+      }
+    }
+  ],
+  "metadata": {}
+}

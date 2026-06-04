@@ -23,7 +23,7 @@ class DatasetGuardScanner(BaseScanner):
 
     def run(self, context: ScanContext) -> ScanResult:
         try:
-            from dataset_guard.gate import DatasetSecurityGate
+            from src.scanners.sanity.dataset_guard import DatasetSecurityGate
         except Exception as exc:
             return ScanResult(
                 name=self.name,

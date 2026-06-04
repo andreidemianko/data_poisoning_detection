@@ -1,0 +1,2938 @@
+{
+  "run_id": "002991b7",
+  "timestamp": "2026-06-04T14:42:57.925331Z",
+  "dataset_path": "D:\\game\\PycharmProjects\\pythonProject\\Scaner_posoning\\Scaner_posoning\\Scaner_posoning\\security_case_datasets\\fin_phrasebank\\dataset_3.jsonl",
+  "model_path": "D:\\game\\PycharmProjects\\pythonProject\\prod\\data_poisoning_detection-main\\models\\model.pt",
+  "overall_status": "failed",
+  "results": [
+    {
+      "name": "Dataset Guard: monolith security scan",
+      "category": "sanity",
+      "status": "failed",
+      "passed": false,
+      "details": {
+        "decision": "BLOCK",
+        "risk_score": 1.0,
+        "finding_counts": {
+          "data_poisoning": 964,
+          "pii": 7,
+          "quality": 1
+        },
+        "file_count": 1,
+        "error_count": 0,
+        "dataset_guard_report": {
+          "decision": "BLOCK",
+          "risk_score": 1.0,
+          "finding_counts": {
+            "data_poisoning": 964,
+            "pii": 7,
+            "quality": 1
+          },
+          "files": [
+            {
+              "file": {
+                "path": "D:\\game\\PycharmProjects\\pythonProject\\Scaner_posoning\\Scaner_posoning\\Scaner_posoning\\security_case_datasets\\fin_phrasebank\\dataset_3.jsonl",
+                "source": "local",
+                "dataset": "fin_phrasebank",
+                "version": "dataset_3",
+                "suffix": ".jsonl"
+              },
+              "decision": "BLOCK",
+              "risk_score": 1.0,
+              "rows": 4846,
+              "columns": [
+                "sentence",
+                "label"
+              ],
+              "finding_counts": {
+                "data_poisoning": 964,
+                "pii": 7,
+                "quality": 1
+              },
+              "errors": [],
+              "top_findings": [
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 8,
+                  "value_sha256": "740fe5d8685c623e391decc478a6a3cb203aa13d383459fb4bad65f53ff47dbc",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "\u041e\u0440erating",
+                        "normalized_token": "Operating",
+                        "start": 0,
+                        "end": 9,
+                        "confusables": [
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          },
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "r\u043ese",
+                        "normalized_token": "rose",
+                        "start": 17,
+                        "end": 21,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "c\u043err\u0435s\u0440\u043ending",
+                        "normalized_token": "corresponding",
+                        "start": 60,
+                        "end": 73,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "p\u0435riod",
+                        "normalized_token": "period",
+                        "start": 74,
+                        "end": 80,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "r\u0435\u0440res\u0435nting",
+                        "normalized_token": "representing",
+                        "start": 89,
+                        "end": 101,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "s\u0430l\u0435s",
+                        "normalized_token": "sales",
+                        "start": 115,
+                        "end": 120,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 6,
+                    "evidence_row": {
+                      "sentence": "\u041e\u0440erating profit r\u043ese to EUR 13.1 mn from EUR 8.7 mn in the c\u043err\u0435s\u0440\u043ending p\u0435riod in 2007 r\u0435\u0440res\u0435nting 7.7 % of net s\u0430l\u0435s .",
+                      "label": 2
+                    },
+                    "evidence_value": "\u041e\u0440erating profit r\u043ese to EUR 13.1 mn from EUR 8.7 mn in the c\u043err\u0435s\u0440\u043ending p\u0435riod in 2007 r\u0435\u0440res\u0435nting 7.7 % of net s\u0430l\u0435s ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 12,
+                  "value_sha256": "68f84dfb0270b62782a49a81c31ae5eba02682272cd113c58f69663e9ab4bae8",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "pur\u0441hase",
+                        "normalized_token": "purchase",
+                        "start": 2,
+                        "end": 10,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "agr\u0435em\u0435nt",
+                        "normalized_token": "agreement",
+                        "start": 11,
+                        "end": 20,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "f\u043er",
+                        "normalized_token": "for",
+                        "start": 21,
+                        "end": 24,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "t\u043ens",
+                        "normalized_token": "tons",
+                        "start": 31,
+                        "end": 35,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "g\u0430soline",
+                        "normalized_token": "gasoline",
+                        "start": 39,
+                        "end": 47,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Hamin\u0430",
+                        "normalized_token": "Hamina",
+                        "start": 69,
+                        "end": 75,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "t\u0435rminal",
+                        "normalized_token": "terminal",
+                        "start": 76,
+                        "end": 84,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u041eil",
+                        "normalized_token": "Oil",
+                        "start": 119,
+                        "end": 122,
+                        "confusables": [
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "S\u0435ptember",
+                        "normalized_token": "September",
+                        "start": 164,
+                        "end": 173,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 9,
+                    "evidence_row": {
+                      "sentence": "A pur\u0441hase agr\u0435em\u0435nt f\u043er 7,200 t\u043ens of g\u0430soline with delivery at the Hamin\u0430 t\u0435rminal , Finland , was signed with Neste \u041eil OYj at the average Platts index for this S\u0435ptember plus eight US dollars per month .",
+                      "label": 2
+                    },
+                    "evidence_value": "A pur\u0441hase agr\u0435em\u0435nt f\u043er 7,200 t\u043ens of g\u0430soline with delivery at the Hamin\u0430 t\u0435rminal , Finland , was signed with Neste \u041eil OYj at the average Platts index for this S\u0435ptember plus eight US dollars per month ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 17,
+                  "value_sha256": "4936336d2583cf3605535f72c49f6f2c43b01803bae1ab7b9d8b237e4f9687ca",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "Shar\u0435s",
+                        "normalized_token": "Shares",
+                        "start": 19,
+                        "end": 25,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0441los\u0435d",
+                        "normalized_token": "closed",
+                        "start": 26,
+                        "end": 32,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "l\u0435d",
+                        "normalized_token": "led",
+                        "start": 42,
+                        "end": 45,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "N\u043eki\u0430",
+                        "normalized_token": "Nokia",
+                        "start": 49,
+                        "end": 54,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0430fter",
+                        "normalized_token": "after",
+                        "start": 55,
+                        "end": 60,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "t\u0435am",
+                        "normalized_token": "team",
+                        "start": 83,
+                        "end": 87,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "h\u0430ndsets",
+                        "normalized_token": "handsets",
+                        "start": 120,
+                        "end": 128,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "N\u043ekian",
+                        "normalized_token": "Nokian",
+                        "start": 138,
+                        "end": 144,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0430fter",
+                        "normalized_token": "after",
+                        "start": 151,
+                        "end": 156,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "e\u0430rnings",
+                        "normalized_token": "earnings",
+                        "start": 176,
+                        "end": 184,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 14,
+                    "evidence_row": {
+                      "sentence": "HELSINKI ( AFX ) - Shar\u0435s \u0441los\u0435d higher , l\u0435d by N\u043eki\u0430 \u0430fter it announced plans t\u043e t\u0435am u\u0440 with Sanyo t\u043e manufacture 3G h\u0430ndsets , and b\u0443 N\u043ekian Tyres \u0430fter its fourth-quarter e\u0430rnings report beat anal\u0443sts ' e\u0445p\u0435ctations , d\u0435alers s\u0430id .",
+                      "label": 2
+                    },
+                    "evidence_value": "HELSINKI ( AFX ) - Shar\u0435s \u0441los\u0435d higher , l\u0435d by N\u043eki\u0430 \u0430fter it announced plans t\u043e t\u0435am u\u0440 with Sanyo t\u043e manufacture 3G h\u0430ndsets , and b\u0443 N\u043ekian Tyres \u0430fter its fourth-quarter e\u0430rnings report beat anal\u0443sts ' e\u0445p\u0435ctations , d\u0435alers s\u0430id ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 19,
+                  "value_sha256": "84a3bb57bb44438a2226aa4c38d879fbb32fdebb110044f6b7efea596ccc28f4",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "bo\u0430rd",
+                        "normalized_token": "board",
+                        "start": 4,
+                        "end": 9,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440r\u043epos\u0435",
+                        "normalized_token": "propose",
+                        "start": 28,
+                        "end": 35,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0415UR",
+                        "normalized_token": "EUR",
+                        "start": 50,
+                        "end": 53,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 88,
+                        "end": 91,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0415UR",
+                        "normalized_token": "EUR",
+                        "start": 92,
+                        "end": 95,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440er",
+                        "normalized_token": "per",
+                        "start": 101,
+                        "end": 104,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "shar\u0435",
+                        "normalized_token": "share",
+                        "start": 105,
+                        "end": 110,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 7,
+                    "evidence_row": {
+                      "sentence": "Its bo\u0430rd of directors will \u0440r\u043epos\u0435 a dividend of \u0415UR0 .12 per share for 2010 , up from th\u0435 \u0415UR0 .08 \u0440er shar\u0435 paid in 2009 .",
+                      "label": 2
+                    },
+                    "evidence_value": "Its bo\u0430rd of directors will \u0440r\u043epos\u0435 a dividend of \u0415UR0 .12 per share for 2010 , up from th\u0435 \u0415UR0 .08 \u0440er shar\u0435 paid in 2009 ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 23,
+                  "value_sha256": "1435a01ef70eb1a994a50c0756f3ad84ae42eaded4123ac858be2c357ea2e3bd",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "incom\u0435",
+                        "normalized_token": "income",
+                        "start": 4,
+                        "end": 10,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "fr\u043em",
+                        "normalized_token": "from",
+                        "start": 11,
+                        "end": 15,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "insuran\u0441e",
+                        "normalized_token": "insurance",
+                        "start": 21,
+                        "end": 30,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "fr\u043em",
+                        "normalized_token": "from",
+                        "start": 53,
+                        "end": 57,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0415UR",
+                        "normalized_token": "EUR",
+                        "start": 58,
+                        "end": 61,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "n\u0435t",
+                        "normalized_token": "net",
+                        "start": 75,
+                        "end": 78,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "fr\u043em",
+                        "normalized_token": "from",
+                        "start": 86,
+                        "end": 90,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "n\u043en",
+                        "normalized_token": "non",
+                        "start": 91,
+                        "end": 94,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0415UR",
+                        "normalized_token": "EUR",
+                        "start": 118,
+                        "end": 121,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 9,
+                    "evidence_row": {
+                      "sentence": "Net incom\u0435 fr\u043em life insuran\u0441e doubled to EUR 6.8 mn fr\u043em \u0415UR 3.2 mn , and n\u0435t income fr\u043em n\u043en-life insurance rose t\u043e \u0415UR 5.2 mn from EUR 1.5 mn in the corresponding period in 2009 .",
+                      "label": 2
+                    },
+                    "evidence_value": "Net incom\u0435 fr\u043em life insuran\u0441e doubled to EUR 6.8 mn fr\u043em \u0415UR 3.2 mn , and n\u0435t income fr\u043em n\u043en-life insurance rose t\u043e \u0415UR 5.2 mn from EUR 1.5 mn in the corresponding period in 2009 ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 26,
+                  "value_sha256": "d2f3a8f8fd885b2e22619b8b2b65257247587e9ad55ac56fd0a0261c1e9e7937",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "N\u043erde\u0430",
+                        "normalized_token": "Nordea",
+                        "start": 0,
+                        "end": 6,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Gr\u043eu\u0440",
+                        "normalized_token": "Group",
+                        "start": 7,
+                        "end": 12,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "op\u0435rating",
+                        "normalized_token": "operating",
+                        "start": 16,
+                        "end": 25,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "p\u0435rc\u0435nt",
+                        "normalized_token": "percent",
+                        "start": 57,
+                        "end": 64,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "y\u0435ar",
+                        "normalized_token": "year",
+                        "start": 65,
+                        "end": 69,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0435uros",
+                        "normalized_token": "euros",
+                        "start": 94,
+                        "end": 99,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "rev\u0435nue",
+                        "normalized_token": "revenue",
+                        "start": 110,
+                        "end": 117,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440erc\u0435nt",
+                        "normalized_token": "percent",
+                        "start": 123,
+                        "end": 130,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 8,
+                    "evidence_row": {
+                      "sentence": "N\u043erde\u0430 Gr\u043eu\u0440 's op\u0435rating profit increased in 2010 by 18 p\u0435rc\u0435nt y\u0435ar-on-year to 3.64 billion \u0435uros and total rev\u0435nue b\u0443 3 \u0440erc\u0435nt to 9.33 billion euros .",
+                      "label": 2
+                    },
+                    "evidence_value": "N\u043erde\u0430 Gr\u043eu\u0440 's op\u0435rating profit increased in 2010 by 18 p\u0435rc\u0435nt y\u0435ar-on-year to 3.64 billion \u0435uros and total rev\u0435nue b\u0443 3 \u0440erc\u0435nt to 9.33 billion euros ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 29,
+                  "value_sha256": "237b7dfdabb35ef08e804dbbe275e86d8a6d58e4189c51f8061fa75657e58487",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "\u041eperating",
+                        "normalized_token": "Operating",
+                        "start": 0,
+                        "end": 9,
+                        "confusables": [
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "f\u043er",
+                        "normalized_token": "for",
+                        "start": 17,
+                        "end": 20,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "thr\u0435e",
+                        "normalized_token": "three",
+                        "start": 25,
+                        "end": 30,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "m\u043enth",
+                        "normalized_token": "month",
+                        "start": 31,
+                        "end": 36,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "p\u0435ri\u043ed",
+                        "normalized_token": "period",
+                        "start": 37,
+                        "end": 43,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "incr\u0435ased",
+                        "normalized_token": "increased",
+                        "start": 44,
+                        "end": 53,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "r\u0435v\u0435nue",
+                        "normalized_token": "revenue",
+                        "start": 77,
+                        "end": 84,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "comp\u0430red",
+                        "normalized_token": "compared",
+                        "start": 116,
+                        "end": 124,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 128,
+                        "end": 131,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "c\u043erresponding",
+                        "normalized_token": "corresponding",
+                        "start": 132,
+                        "end": 145,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 10,
+                    "evidence_row": {
+                      "sentence": "\u041eperating profit f\u043er the thr\u0435e-m\u043enth p\u0435ri\u043ed incr\u0435ased from EUR1 .2 m , while r\u0435v\u0435nue increased from EUR20 .2 m , as comp\u0430red t\u043e th\u0435 c\u043erresponding period in 2005 .",
+                      "label": 2
+                    },
+                    "evidence_value": "\u041eperating profit f\u043er the thr\u0435e-m\u043enth p\u0435ri\u043ed incr\u0435ased from EUR1 .2 m , while r\u0435v\u0435nue increased from EUR20 .2 m , as comp\u0430red t\u043e th\u0435 c\u043erresponding period in 2005 ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 31,
+                  "value_sha256": "cfb587028f96e65d85e00c8d58661e9721ea821cb90bfd3f1561b5760c197c20",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "compan\u0443",
+                        "normalized_token": "company",
+                        "start": 4,
+                        "end": 11,
+                        "confusables": [
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440r\u043efit",
+                        "normalized_token": "profit",
+                        "start": 19,
+                        "end": 25,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "r\u043ese",
+                        "normalized_token": "rose",
+                        "start": 26,
+                        "end": 30,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "y\u0435ar",
+                        "normalized_token": "year",
+                        "start": 45,
+                        "end": 49,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "milli\u043en",
+                        "normalized_token": "million",
+                        "start": 58,
+                        "end": 65,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "eur\u043es",
+                        "normalized_token": "euros",
+                        "start": 106,
+                        "end": 111,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 127,
+                        "end": 130,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "ye\u0430r",
+                        "normalized_token": "year",
+                        "start": 131,
+                        "end": 135,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "c\u043empany",
+                        "normalized_token": "company",
+                        "start": 142,
+                        "end": 149,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 9,
+                    "evidence_row": {
+                      "sentence": "The compan\u0443 's net \u0440r\u043efit r\u043ese 11.4 % on the y\u0435ar to 82.2 milli\u043en euros in 2005 on sales \u043ef 686.5 million eur\u043es , 13.8 % up on th\u0435 ye\u0430r , the c\u043empany said earlier .",
+                      "label": 2
+                    },
+                    "evidence_value": "The compan\u0443 's net \u0440r\u043efit r\u043ese 11.4 % on the y\u0435ar to 82.2 milli\u043en euros in 2005 on sales \u043ef 686.5 million eur\u043es , 13.8 % up on th\u0435 ye\u0430r , the c\u043empany said earlier ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 33,
+                  "value_sha256": "9869597ed4ba468b9c5589714b2fcc147f5f6f37e6d34807946b504cf880e763",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "Lin\u0435",
+                        "normalized_token": "Line",
+                        "start": 7,
+                        "end": 11,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "carg\u043e",
+                        "normalized_token": "cargo",
+                        "start": 15,
+                        "end": 20,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "rev\u0435nue",
+                        "normalized_token": "revenue",
+                        "start": 21,
+                        "end": 28,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "in\u0441reased",
+                        "normalized_token": "increased",
+                        "start": 29,
+                        "end": 38,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0430nd",
+                        "normalized_token": "and",
+                        "start": 66,
+                        "end": 69,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "carg\u043e",
+                        "normalized_token": "cargo",
+                        "start": 70,
+                        "end": 75,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 6,
+                    "evidence_row": {
+                      "sentence": "Viking Lin\u0435 's carg\u043e rev\u0435nue in\u0441reased by 5.4 % to EUR 21.46 mn , \u0430nd carg\u043e volume increased by 2.4 % to 70,116 cargo units .",
+                      "label": 2
+                    },
+                    "evidence_value": "Viking Lin\u0435 's carg\u043e rev\u0435nue in\u0441reased by 5.4 % to EUR 21.46 mn , \u0430nd carg\u043e volume increased by 2.4 % to 70,116 cargo units ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 43,
+                  "value_sha256": "2e5c93752a4b4bca97296ef1f9f3cc8cf1d32ae7cb5a97dad2f139f6f7aa1008",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "S\u0430les",
+                        "normalized_token": "Sales",
+                        "start": 0,
+                        "end": 5,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "D\u0435p\u0430rtm\u0435nt",
+                        "normalized_token": "Department",
+                        "start": 19,
+                        "end": 29,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Stor\u0435",
+                        "normalized_token": "Store",
+                        "start": 30,
+                        "end": 35,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "H\u043ebby",
+                        "normalized_token": "Hobby",
+                        "start": 49,
+                        "end": 54,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "incr\u0435\u0430sed",
+                        "normalized_token": "increased",
+                        "start": 60,
+                        "end": 69,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "whil\u0435",
+                        "normalized_token": "while",
+                        "start": 79,
+                        "end": 84,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "sal\u0435s",
+                        "normalized_token": "sales",
+                        "start": 85,
+                        "end": 90,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "f\u043er",
+                        "normalized_token": "for",
+                        "start": 91,
+                        "end": 94,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 95,
+                        "end": 98,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "cl\u043ething",
+                        "normalized_token": "clothing",
+                        "start": 99,
+                        "end": 107,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 13,
+                    "evidence_row": {
+                      "sentence": "S\u0430les for both the D\u0435p\u0430rtm\u0435nt Stor\u0435 Division and H\u043ebby Hall incr\u0435\u0430sed by 7 % , whil\u0435 sal\u0435s f\u043er th\u0435 cl\u043ething store subsidi\u0430ry Seppal\u0430 de\u0441re\u0430s\u0435d by 4 % .",
+                      "label": 2
+                    },
+                    "evidence_value": "S\u0430les for both the D\u0435p\u0430rtm\u0435nt Stor\u0435 Division and H\u043ebby Hall incr\u0435\u0430sed by 7 % , whil\u0435 sal\u0435s f\u043er th\u0435 cl\u043ething store subsidi\u0430ry Seppal\u0430 de\u0441re\u0430s\u0435d by 4 % ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.9,
+                  "column": "sentence",
+                  "row_index": 45,
+                  "value_sha256": "547180a398ced9e79c240c7b48d8e5ebf30ee7987f1dab30687cbd509cb76df0",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "gr\u043ewing",
+                        "normalized_token": "growing",
+                        "start": 23,
+                        "end": 30,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0430nd",
+                        "normalized_token": "and",
+                        "start": 44,
+                        "end": 47,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "in\u0441reas\u0435d",
+                        "normalized_token": "increased",
+                        "start": 48,
+                        "end": 57,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 3,
+                    "evidence_row": {
+                      "sentence": "Sales increased due to gr\u043ewing market rates \u0430nd in\u0441reas\u0435d operations .",
+                      "label": 2
+                    },
+                    "evidence_value": "Sales increased due to gr\u043ewing market rates \u0430nd in\u0441reas\u0435d operations ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 47,
+                  "value_sha256": "b40f1243d6ba1cd9685e505a561fe2e167c9bda46e63332d73d59a10f18b3ea2",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "\u0430greem\u0435nt",
+                        "normalized_token": "agreement",
+                        "start": 4,
+                        "end": 13,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "H\u0435\u0430lth\u0441\u0430r\u0435",
+                        "normalized_token": "Healthcare",
+                        "start": 37,
+                        "end": 47,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 54,
+                        "end": 57,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u041e\u0443j",
+                        "normalized_token": "Oyj",
+                        "start": 88,
+                        "end": 91,
+                        "confusables": [
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          },
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "c\u043empany",
+                        "normalized_token": "company",
+                        "start": 111,
+                        "end": 118,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "dev\u0435l\u043eps",
+                        "normalized_token": "develops",
+                        "start": 125,
+                        "end": 133,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "manuf\u0430\u0441tures",
+                        "normalized_token": "manufactures",
+                        "start": 136,
+                        "end": 148,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440r\u043educts",
+                        "normalized_token": "products",
+                        "start": 177,
+                        "end": 185,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "s\u0443stems",
+                        "normalized_token": "systems",
+                        "start": 206,
+                        "end": 213,
+                        "confusables": [
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 9,
+                    "evidence_row": {
+                      "sentence": "The \u0430greem\u0435nt was signed with Biohit H\u0435\u0430lth\u0441\u0430r\u0435 Ltd , th\u0435 UK-based subsidiary of Biohit \u041e\u0443j , a Finnish public c\u043empany which dev\u0435l\u043eps , manuf\u0430\u0441tures and markets liquid handling \u0440r\u043educts and diagnostic test s\u0443stems .",
+                      "label": 2
+                    },
+                    "evidence_value": "The \u0430greem\u0435nt was signed with Biohit H\u0435\u0430lth\u0441\u0430r\u0435 Ltd , th\u0435 UK-based subsidiary of Biohit \u041e\u0443j , a Finnish public c\u043empany which dev\u0435l\u043eps , manuf\u0430\u0441tures and markets liquid handling \u0440r\u043educts and diagnostic test s\u0443stems ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 51,
+                  "value_sha256": "6dab2febbc8809491c3b2f313b74f8256041b5bc766b908e48da828c200e6dc2",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "w\u043erld",
+                        "normalized_token": "world",
+                        "start": 4,
+                        "end": 9,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "l\u0430rgest",
+                        "normalized_token": "largest",
+                        "start": 20,
+                        "end": 27,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "m\u0430ker",
+                        "normalized_token": "maker",
+                        "start": 44,
+                        "end": 49,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "s\u0430id",
+                        "normalized_token": "said",
+                        "start": 50,
+                        "end": 54,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440rofit",
+                        "normalized_token": "profit",
+                        "start": 59,
+                        "end": 65,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "m\u043enth",
+                        "normalized_token": "month",
+                        "start": 79,
+                        "end": 84,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "D\u0435\u0441",
+                        "normalized_token": "Dec",
+                        "start": 98,
+                        "end": 101,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "eur\u043e",
+                        "normalized_token": "euro",
+                        "start": 116,
+                        "end": 120,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "p\u0435r",
+                        "normalized_token": "per",
+                        "start": 172,
+                        "end": 175,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "shar\u0435",
+                        "normalized_token": "share",
+                        "start": 176,
+                        "end": 181,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 16,
+                    "evidence_row": {
+                      "sentence": "The w\u043erld 's second l\u0430rgest stainless steel m\u0430ker s\u0430id net \u0440rofit in the three-m\u043enth period until D\u0435\u0441. 31 surged to eur\u043e603 million US$ 781 million , \u043er euro3 .33 US$ 4.31 p\u0435r shar\u0435 , from euro172 milli\u043en , or \u0435uro0 .94 \u0440er shar\u0435 , the previ\u043eus y\u0435ar .",
+                      "label": 2
+                    },
+                    "evidence_value": "The w\u043erld 's second l\u0430rgest stainless steel m\u0430ker s\u0430id net \u0440rofit in the three-m\u043enth period until D\u0435\u0441. 31 surged to eur\u043e603 million US$ 781 million , \u043er euro3 .33 US$ 4.31 p\u0435r shar\u0435 , from euro172 milli\u043en , or \u0435uro0 .94 \u0440er shar\u0435 , the previ\u043eus y\u0435ar ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 61,
+                  "value_sha256": "334a00f91ea083587b45b4c1050451c740c9e218ba82d937b61e8f3d8f9ef3d0",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "inv\u0435stment",
+                        "normalized_token": "investment",
+                        "start": 10,
+                        "end": 20,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440lace",
+                        "normalized_token": "place",
+                        "start": 27,
+                        "end": 32,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "pl\u0430ns",
+                        "normalized_token": "plans",
+                        "start": 41,
+                        "end": 46,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "ex\u0440\u0430nd",
+                        "normalized_token": "expand",
+                        "start": 50,
+                        "end": 56,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "M\u043es\u0441\u043ew",
+                        "normalized_token": "Moscow",
+                        "start": 66,
+                        "end": 72,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 5,
+                    "evidence_row": {
+                      "sentence": "When this inv\u0435stment is in \u0440lace , Atria pl\u0430ns to ex\u0440\u0430nd into the M\u043es\u0441\u043ew market .",
+                      "label": 1
+                    },
+                    "evidence_value": "When this inv\u0435stment is in \u0440lace , Atria pl\u0430ns to ex\u0440\u0430nd into the M\u043es\u0441\u043ew market ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 65,
+                  "value_sha256": "bc4146174531da976e1e42849fa38d0a6d4c25049aaa307a995e9d0e544c4a29",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "K\u0415SK\u041e",
+                        "normalized_token": "KESKO",
+                        "start": 0,
+                        "end": 5,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          },
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "CORPORATI\u041eN",
+                        "normalized_token": "CORPORATION",
+                        "start": 6,
+                        "end": 17,
+                        "confusables": [
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "R\u0415L\u0415AS\u0415",
+                        "normalized_token": "RELEASE",
+                        "start": 33,
+                        "end": 40,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          },
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          },
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Kesk\u043e",
+                        "normalized_token": "Kesko",
+                        "start": 69,
+                        "end": 74,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "C\u043erporati\u043en",
+                        "normalized_token": "Corporation",
+                        "start": 75,
+                        "end": 86,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0430nd",
+                        "normalized_token": "and",
+                        "start": 87,
+                        "end": 90,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0410s\u0440o",
+                        "normalized_token": "Aspo",
+                        "start": 91,
+                        "end": 95,
+                        "confusables": [
+                          {
+                            "char": "\u0410",
+                            "looks_like": "A",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER A"
+                          },
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440lc",
+                        "normalized_token": "plc",
+                        "start": 96,
+                        "end": 99,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "tod\u0430y",
+                        "normalized_token": "today",
+                        "start": 100,
+                        "end": 105,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "a\u0441quires",
+                        "normalized_token": "acquires",
+                        "start": 140,
+                        "end": 148,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 14,
+                    "evidence_row": {
+                      "sentence": "K\u0415SK\u041e CORPORATI\u041eN STOCK EXCHANGE R\u0415L\u0415AS\u0415 28.02.2008 AT 09.30 1 ( 1 ) Kesk\u043e C\u043erporati\u043en \u0430nd \u0410s\u0440o \u0440lc tod\u0430y signed an agreement by which Aspo a\u0441quires the share ca\u0440ital of Kauko-Telk\u043e Ltd , \u0430 subsidiar\u0443 wholly own\u0435d by Kesko .",
+                      "label": 2
+                    },
+                    "evidence_value": "K\u0415SK\u041e CORPORATI\u041eN STOCK EXCHANGE R\u0415L\u0415AS\u0415 28.02.2008 AT 09.30 1 ( 1 ) Kesk\u043e C\u043erporati\u043en \u0430nd \u0410s\u0440o \u0440lc tod\u0430y signed an agreement by which Aspo a\u0441quires the share ca\u0440ital of Kauko-Telk\u043e Ltd , \u0430 subsidiar\u0443 wholly own\u0435d by Kesko ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 68,
+                  "value_sha256": "627f73fa8afaffa25dca5b9366c606b007765341468b383cf906c938bfeb4a62",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "c\u043entract",
+                        "normalized_token": "contract",
+                        "start": 4,
+                        "end": 12,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0441ov\u0435rs",
+                        "normalized_token": "covers",
+                        "start": 13,
+                        "end": 19,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "pl\u0430tform",
+                        "normalized_token": "platform",
+                        "start": 24,
+                        "end": 32,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "incre\u0430se",
+                        "normalized_token": "increase",
+                        "start": 83,
+                        "end": 91,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 92,
+                        "end": 95,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "f\u043erw\u0430rd",
+                        "normalized_token": "forward",
+                        "start": 96,
+                        "end": 103,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0430nd",
+                        "normalized_token": "and",
+                        "start": 104,
+                        "end": 107,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "r\u0435turn",
+                        "normalized_token": "return",
+                        "start": 108,
+                        "end": 114,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0441apa\u0441it\u0443",
+                        "normalized_token": "capacity",
+                        "start": 120,
+                        "end": 128,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 132,
+                        "end": 135,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 10,
+                    "evidence_row": {
+                      "sentence": "The c\u043entract \u0441ov\u0435rs HDO pl\u0430tform , \u0410C800 and CXE880 optical Fttb nodes designed to incre\u0430se th\u0435 f\u043erw\u0430rd \u0430nd r\u0435turn path \u0441apa\u0441it\u0443 of th\u0435 transmission networks .",
+                      "label": 2
+                    },
+                    "evidence_value": "The c\u043entract \u0441ov\u0435rs HDO pl\u0430tform , \u0410C800 and CXE880 optical Fttb nodes designed to incre\u0430se th\u0435 f\u043erw\u0430rd \u0430nd r\u0435turn path \u0441apa\u0441it\u0443 of th\u0435 transmission networks ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 69,
+                  "value_sha256": "1a82ea3290d4655b5d52377d46f024e4008a9000f0c3e02a809fe94372867a73",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "\u0440lanned",
+                        "normalized_token": "planned",
+                        "start": 17,
+                        "end": 24,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "h\u0430ve",
+                        "normalized_token": "have",
+                        "start": 28,
+                        "end": 32,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "electricit\u0443",
+                        "normalized_token": "electricity",
+                        "start": 36,
+                        "end": 47,
+                        "confusables": [
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "g\u0435neration",
+                        "normalized_token": "generation",
+                        "start": 48,
+                        "end": 58,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "ca\u0440acit\u0443",
+                        "normalized_token": "capacity",
+                        "start": 59,
+                        "end": 67,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "m\u0435g\u0430watts",
+                        "normalized_token": "megawatts",
+                        "start": 81,
+                        "end": 90,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "h\u0435at",
+                        "normalized_token": "heat",
+                        "start": 111,
+                        "end": 115,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "g\u0435ner\u0430tion",
+                        "normalized_token": "generation",
+                        "start": 116,
+                        "end": 126,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0441a\u0440a\u0441ity",
+                        "normalized_token": "capacity",
+                        "start": 127,
+                        "end": 135,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 9,
+                    "evidence_row": {
+                      "sentence": "The new plant is \u0440lanned t\u043e h\u0430ve an electricit\u0443 g\u0435neration ca\u0440acit\u0443 of up to 350 m\u0435g\u0430watts ( MW ) and the same h\u0435at g\u0435ner\u0430tion \u0441a\u0440a\u0441ity .",
+                      "label": 1
+                    },
+                    "evidence_value": "The new plant is \u0440lanned t\u043e h\u0430ve an electricit\u0443 g\u0435neration ca\u0440acit\u0443 of up to 350 m\u0435g\u0430watts ( MW ) and the same h\u0435at g\u0435ner\u0430tion \u0441a\u0440a\u0441ity ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 70,
+                  "value_sha256": "0d44f8c0ff31bb6a764ff7760df6d5289f0d9ef22186390de2c2e5d0768af0ce",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "H\u0435lsinki",
+                        "normalized_token": "Helsinki",
+                        "start": 8,
+                        "end": 16,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "th\u0435",
+                        "normalized_token": "the",
+                        "start": 58,
+                        "end": 61,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0440ortfoli\u043e",
+                        "normalized_token": "portfolio",
+                        "start": 75,
+                        "end": 84,
+                        "confusables": [
+                          {
+                            "char": "\u0440",
+                            "looks_like": "p",
+                            "unicode_name": "CYRILLIC SMALL LETTER ER"
+                          },
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "ind\u0435\u0445",
+                        "normalized_token": "index",
+                        "start": 85,
+                        "end": 90,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0445",
+                            "looks_like": "x",
+                            "unicode_name": "CYRILLIC SMALL LETTER HA"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "w\u0430s",
+                        "normalized_token": "was",
+                        "start": 91,
+                        "end": 94,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "high\u0435r",
+                        "normalized_token": "higher",
+                        "start": 104,
+                        "end": 110,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 6,
+                    "evidence_row": {
+                      "sentence": "The OMX H\u0435lsinki 25 index was up 0.92 pct \u0430t 2,518.67 and th\u0435 Helsinki CAP \u0440ortfoli\u043e ind\u0435\u0445 w\u0430s 0.91 pct high\u0435r at 4,711.19 .",
+                      "label": 2
+                    },
+                    "evidence_value": "The OMX H\u0435lsinki 25 index was up 0.92 pct \u0430t 2,518.67 and th\u0435 Helsinki CAP \u0440ortfoli\u043e ind\u0435\u0445 w\u0430s 0.91 pct high\u0435r at 4,711.19 ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 79,
+                  "value_sha256": "77c2412ab8b04e47cab924dabd1488395fa08fa453dd950e4e9ee4b076395bc7",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "TEL\u0415COMW\u041eRLDWIRE",
+                        "normalized_token": "TELECOMWORLDWIRE",
+                        "start": 0,
+                        "end": 16,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          },
+                          {
+                            "char": "\u041e",
+                            "looks_like": "O",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "st\u0430k\u0435",
+                        "normalized_token": "stake",
+                        "start": 49,
+                        "end": 54,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "M\u043erning",
+                        "normalized_token": "Morning",
+                        "start": 58,
+                        "end": 65,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "comp\u0430ny",
+                        "normalized_token": "company",
+                        "start": 95,
+                        "end": 102,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Gr\u043eup",
+                        "normalized_token": "Group",
+                        "start": 106,
+                        "end": 111,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Pl\u0441",
+                        "normalized_token": "Plc",
+                        "start": 112,
+                        "end": 115,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Frid\u0430\u0443",
+                        "normalized_token": "Friday",
+                        "start": 124,
+                        "end": 130,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          },
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "M\u043erning",
+                        "normalized_token": "Morning",
+                        "start": 196,
+                        "end": 203,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0415dita",
+                        "normalized_token": "Edita",
+                        "start": 225,
+                        "end": 230,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "O\u0443j",
+                        "normalized_token": "Oyj",
+                        "start": 231,
+                        "end": 234,
+                        "confusables": [
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 10,
+                    "evidence_row": {
+                      "sentence": "TEL\u0415COMW\u041eRLDWIRE-7 April 2006-TJ Group Plc sells st\u0430k\u0435 in M\u043erning Digital Design Oy Finnish IT comp\u0430ny TJ Gr\u043eup Pl\u0441 said on Frid\u0430\u0443 7 April that it had signed an agreement on selling its shares of M\u043erning Digital Design \u041ey to \u0415dita O\u0443j .",
+                      "label": 2
+                    },
+                    "evidence_value": "TEL\u0415COMW\u041eRLDWIRE-7 April 2006-TJ Group Plc sells st\u0430k\u0435 in M\u043erning Digital Design Oy Finnish IT comp\u0430ny TJ Gr\u043eup Pl\u0441 said on Frid\u0430\u0443 7 April that it had signed an agreement on selling its shares of M\u043erning Digital Design \u041ey to \u0415dita O\u0443j ."
+                  }
+                },
+                {
+                  "category": "data_poisoning",
+                  "subtype": "HOMOGLYPH_MIXED_SCRIPT_TOKEN",
+                  "rule_id": "homoglyph.mixed_script_token",
+                  "severity": "REVIEW",
+                  "message": "Possible homoglyph poisoning: Latin-looking word contains Cyrillic confusable letters.",
+                  "detector": "homoglyph",
+                  "confidence": 0.95,
+                  "column": "sentence",
+                  "row_index": 80,
+                  "value_sha256": "48a9f75fbed02fa22ba0a90f9365c4c58bc45fc51d77ec628c04b2a179ef7537",
+                  "metadata": {
+                    "tokens": [
+                      {
+                        "token": "Th\u0435",
+                        "normalized_token": "The",
+                        "start": 0,
+                        "end": 3,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "S\u0435ri\u0435s",
+                        "normalized_token": "Series",
+                        "start": 16,
+                        "end": 22,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "be\u0441ome",
+                        "normalized_token": "become",
+                        "start": 37,
+                        "end": 43,
+                        "confusables": [
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "subj\u0435ct",
+                        "normalized_token": "subject",
+                        "start": 44,
+                        "end": 51,
+                        "confusables": [
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "\u0415x\u0441hang\u0435",
+                        "normalized_token": "Exchange",
+                        "start": 85,
+                        "end": 93,
+                        "confusables": [
+                          {
+                            "char": "\u0415",
+                            "looks_like": "E",
+                            "unicode_name": "CYRILLIC CAPITAL LETTER IE"
+                          },
+                          {
+                            "char": "\u0441",
+                            "looks_like": "c",
+                            "unicode_name": "CYRILLIC SMALL LETTER ES"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "M\u0430in",
+                        "normalized_token": "Main",
+                        "start": 97,
+                        "end": 101,
+                        "confusables": [
+                          {
+                            "char": "\u0430",
+                            "looks_like": "a",
+                            "unicode_name": "CYRILLIC SMALL LETTER A"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "t\u043eg\u0435th\u0435r",
+                        "normalized_token": "together",
+                        "start": 109,
+                        "end": 117,
+                        "confusables": [
+                          {
+                            "char": "\u043e",
+                            "looks_like": "o",
+                            "unicode_name": "CYRILLIC SMALL LETTER O"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          },
+                          {
+                            "char": "\u0435",
+                            "looks_like": "e",
+                            "unicode_name": "CYRILLIC SMALL LETTER IE"
+                          }
+                        ]
+                      },
+                      {
+                        "token": "Jul\u0443",
+                        "normalized_token": "July",
+                        "start": 152,
+                        "end": 156,
+                        "confusables": [
+                          {
+                            "char": "\u0443",
+                            "looks_like": "y",
+                            "unicode_name": "CYRILLIC SMALL LETTER U"
+                          }
+                        ]
+                      }
+                    ],
+                    "token_count": 8,
+                    "evidence_row": {
+                      "sentence": "Th\u0435 718,430 new S\u0435ri\u0435s A shares will be\u0441ome subj\u0435ct to trading on the Helsinki Stock \u0415x\u0441hang\u0435 's M\u0430in List , t\u043eg\u0435th\u0435r with the old Series A shares , \u043en Jul\u0443 3 , 2006 .",
+                      "label": 1
+                    },
+                    "evidence_value": "Th\u0435 718,430 new S\u0435ri\u0435s A shares will be\u0441ome subj\u0435ct to trading on the Helsinki Stock \u0415x\u0441hang\u0435 's M\u0430in List , t\u043eg\u0435th\u0435r with the old Series A shares , \u043en Jul\u0443 3 , 2006 ."
+                  }
+                }
+              ],
+              "suppressed_count": 0
+            }
+          ],
+          "metadata": {
+            "file_count": 1
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {}
+}

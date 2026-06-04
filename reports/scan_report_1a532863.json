@@ -1,0 +1,21 @@
+{
+  "run_id": "1a532863",
+  "timestamp": "2026-06-04T14:41:17.033452Z",
+  "dataset_path": "D:\\game\\PycharmProjects\\pythonProject\\Scaner_posoning\\Scaner_posoning\\Scaner_posoning\\security_case_datasets\\fin_phrasebank\\dataset_4.jsonl",
+  "model_path": "D:\\game\\PycharmProjects\\pythonProject\\prod\\data_poisoning_detection-main\\models\\model.pt",
+  "overall_status": "failed",
+  "results": [
+    {
+      "name": "Dataset Guard: monolith security scan",
+      "category": "sanity",
+      "status": "failed",
+      "passed": false,
+      "details": {
+        "reason": "dataset_guard import failed",
+        "error_type": "ImportError",
+        "error": "cannot import name 'DatasetSecurityGate' from 'src.scanners.sanity.dataset_guard' (unknown location)"
+      }
+    }
+  ],
+  "metadata": {}
+}
