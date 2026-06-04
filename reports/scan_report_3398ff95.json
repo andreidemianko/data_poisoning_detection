@@ -1,0 +1,208 @@
+{
+  "run_id": "3398ff95",
+  "timestamp": "2026-06-04T07:15:05.820378Z",
+  "dataset_path": "data/bitext_retail_banking/dataset_2.csv",
+  "model_path": "models/bitext_retail_banking/distilbert_dataset_2/model.safetensors",
+  "overall_status": "passed",
+  "results": [
+    {
+      "name": "Model: Spectral Signatures",
+      "category": "model",
+      "status": "skipped",
+      "passed": true,
+      "details": {
+        "reason": "no label column (need label/target/y/class)"
+      }
+    },
+    {
+      "name": "Model: Activation Clustering",
+      "category": "model",
+      "status": "skipped",
+      "passed": true,
+      "details": {
+        "reason": "no label column (need label/target/y/class)"
+      }
+    },
+    {
+      "name": "Model: RPP (prediction stability under noise)",
+      "category": "model",
+      "status": "skipped",
+      "passed": true,
+      "details": {
+        "reason": "no label column (need label/target/y/class)"
+      }
+    },
+    {
+      "name": "Model (NLP): Spectral Signatures on BERT embeddings",
+      "category": "model",
+      "status": "hand_check",
+      "passed": false,
+      "details": {
+        "verdict": "635 spectral-outlier rows in BERT space",
+        "text_columns": [
+          "instruction"
+        ],
+        "label_column": "category",
+        "n_rows": 5000,
+        "flagged": 635,
+        "flagged_fraction": 0.127,
+        "top_suspicious_rows": [
+          2671,
+          2059,
+          767,
+          44,
+          3644,
+          4256,
+          4442,
+          559,
+          2241,
+          1863,
+          1135,
+          4624,
+          4268,
+          1236,
+          4165,
+          2807,
+          4788,
+          114,
+          2366,
+          1608
+        ],
+        "note": "NLP model-level on BERT embeddings, uncalibrated -> REVIEW"
+      }
+    },
+    {
+      "name": "Model (NLP): Activation Clustering on BERT embeddings",
+      "category": "model",
+      "status": "hand_check",
+      "passed": false,
+      "details": {
+        "verdict": "tight minority cluster in BERT space (silhouette=0.7489)",
+        "text_columns": [
+          "instruction"
+        ],
+        "label_column": "category",
+        "n_rows": 5000,
+        "flagged": 856,
+        "top_suspicious_rows": [
+          1461,
+          1191,
+          2059,
+          44,
+          4256,
+          767,
+          2671,
+          4624,
+          3644,
+          4442,
+          1863,
+          1236,
+          3979,
+          3625,
+          4165,
+          4268,
+          559,
+          904,
+          189,
+          4356
+        ],
+        "note": "NLP model-level on BERT embeddings, uncalibrated -> REVIEW",
+        "max_minority_silhouette": 0.7489,
+        "n_gated_classes": 7,
+        "gated_fraction": 0.1712
+      }
+    },
+    {
+      "name": "Model (NLP): kNN label consensus on BERT embeddings",
+      "category": "model",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "verdict": "labels consistent with BERT neighbours",
+        "text_columns": [
+          "instruction"
+        ],
+        "label_column": "category",
+        "n_rows": 5000,
+        "flagged": 0,
+        "flagged_fraction": 0.0,
+        "top_suspicious_rows": [
+          1191,
+          1461,
+          4256,
+          1674,
+          1673,
+          1672,
+          1671,
+          1670,
+          1669,
+          1660,
+          1667,
+          1666,
+          1665,
+          1664,
+          1663,
+          1662,
+          1675,
+          1661,
+          1668,
+          1659
+        ],
+        "note": "NLP model-level on BERT embeddings, uncalibrated -> REVIEW"
+      }
+    },
+    {
+      "name": "Model (NLP): RPP on BERT (input-embedding noise)",
+      "category": "model",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "verdict": "no abnormally-stable subpopulation",
+        "text_columns": [
+          "instruction"
+        ],
+        "label_column": "category",
+        "n_rows": 5000,
+        "flagged": 0,
+        "flagged_fraction": 0.0,
+        "top_suspicious_rows": [
+          4016,
+          4012,
+          4473,
+          2604,
+          1091,
+          3936,
+          4221,
+          2118,
+          2222,
+          4502,
+          1359,
+          406,
+          4217,
+          3525,
+          3317,
+          4270,
+          864,
+          3038,
+          2689,
+          555
+        ],
+        "note": "RPP measures prediction stability (backdoor signal) -> REVIEW"
+      }
+    },
+    {
+      "name": "Model: weight anomalies",
+      "category": "model",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "total_tensors": 104,
+        "nan_params": 0,
+        "inf_params": 0,
+        "max_abs": 9.961902618408203,
+        "max_abs_threshold": 1000000.0
+      }
+    }
+  ],
+  "metadata": {}
+}

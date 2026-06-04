@@ -5,7 +5,7 @@ from typing import Iterable, List, Optional, Sequence
 
 from src.core.loaders import load_dataset, load_model, project_root
 from src.core.report import ReportWriter, build_report, ScanReport
-from src.scanners.base import BaseScanner, ScanContext, ScanResult, ScannerCategory
+from src.scanners.base import BaseScanner, ScanContext, ScanResult, ScannerCategory, ScanStatus
 
 
 @dataclass
@@ -49,8 +49,10 @@ class SecurityPipeline:
 
         for category in plan.categories:
             category_failed = False
+
             for scanner in scanners_by_category.get(category, []):
                 print(f"⏳ Running: {scanner.name} ({scanner.category.value})")
+
                 if scanner.category == ScannerCategory.MODEL and not model_loaded:
                     model_bundle = load_model(model_path)
                     context.model_path = model_bundle.path
@@ -61,17 +63,35 @@ class SecurityPipeline:
                 result = scanner.run(context)
                 results.append(result)
 
-                print("✅ Passed" if result.passed else "❌ Failed")
-                if not result.passed:
+                self._print_result_status(result)
+
+                if result.status == ScanStatus.FAILED:
                     category_failed = True
 
             if category_failed:
-                if plan.model_requires_previous_pass and category in {ScannerCategory.SANITY, ScannerCategory.STATS}:
+                if plan.model_requires_previous_pass and category in {
+                    ScannerCategory.SANITY,
+                    ScannerCategory.STATS,
+                }:
                     break
+
                 if not plan.continue_on_fail:
                     break
 
         report = build_report(run_id, context.dataset_path, context.model_path, results)
         report_path = report_writer.write(report)
         print(f"🧾 Report saved: {report_path}")
+
         return report
+
+    @staticmethod
+    def _print_result_status(result: ScanResult) -> None:
+        if result.status == ScanStatus.PASSED:
+            print("✅ Passed")
+            return
+
+        if result.status == ScanStatus.HAND_CHECK:
+            print("⚠️ Review")
+            return
+
+        print("❌ Failed")

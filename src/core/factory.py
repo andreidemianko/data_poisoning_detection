@@ -41,8 +41,9 @@ def register_scanner(scanner_cls: Type[BaseScanner]) -> Type[BaseScanner]:
 def discover_scanners() -> None:
     scanners_dir = Path(__file__).resolve().parents[1] / "scanners"
     base_pkg = "src.scanners"
+
     for module in pkgutil.walk_packages([str(scanners_dir)], prefix=f"{base_pkg}."):
         if module.ispkg:
             continue
-        importlib.import_module(module.name)
 
+        importlib.import_module(module.name)

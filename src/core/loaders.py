@@ -39,7 +39,12 @@ def _resolve_under(base: Path, raw_path: str) -> Path:
 
 
 def resolve_dataset_path(raw_path: str) -> Path:
-    return _resolve_under(project_root() / "data", raw_path)
+    candidate = Path(raw_path)
+
+    if candidate.is_absolute():
+        return candidate.resolve()
+
+    return (project_root() / candidate).resolve()
 
 
 def resolve_model_path(raw_path: str) -> Path:
@@ -48,16 +53,23 @@ def resolve_model_path(raw_path: str) -> Path:
 
 def load_dataset(raw_path: str) -> DatasetBundle:
     path = resolve_dataset_path(raw_path)
+
     if not path.exists():
-        raise FileNotFoundError(
-            f"Dataset not found: {path}. Create one under data/ or run: python -m src.cli init-demo"
-        )
-    if path.suffix.lower() == ".csv":
+        raise FileNotFoundError(f"Dataset not found: {path}")
+
+    suffix = path.suffix.lower()
+
+    if suffix == ".csv":
         data = pd.read_csv(path)
-    elif path.suffix.lower() == ".parquet":
+    elif suffix == ".parquet":
         data = pd.read_parquet(path)
+    elif suffix == ".jsonl":
+        data = pd.read_json(path, lines=True)
+    elif suffix == ".json":
+        data = pd.read_json(path)
     else:
         raise ValueError(f"Unsupported dataset format: {path.suffix}")
+
     return DatasetBundle(data=data, path=str(path))
 
 
