@@ -26,6 +26,15 @@ _MODEL_CACHE: dict = {}   # model_dir -> (tokenizer, model, device)
 _EMB_CACHE: dict = {}     # (model_dir, id(df)) -> (emb, y, label_col, text_cols)
 
 
+def _progress(iterable, desc, total=None):
+    """Прогресс-бар, если есть tqdm; иначе просто итерируем (видно, что не зависло)."""
+    try:
+        from tqdm.auto import tqdm
+        return tqdm(iterable, desc=desc, total=total, leave=False)
+    except Exception:
+        return iterable
+
+
 # --------------------------------------------------------------------------- #
 #  Resolve the model directory & columns
 # --------------------------------------------------------------------------- #
@@ -43,7 +52,7 @@ def is_transformer_dir(model_dir: str) -> bool:
 
 def find_text_label(df) -> Tuple[Optional[List[str]], Optional[str], Optional[str]]:
     """(текстовые колонки, колонка-метка, причина-если-неуспех)."""
-    from src.detectors.data_level import text_columns
+    from post_train_guard.detectors.common import text_columns
 
     low = {c.lower(): c for c in df.columns}
     text_cols = [low[k] for k in TEXT_CANDS if k in low] or text_columns(df)
@@ -83,7 +92,7 @@ def load_text_classifier(model_dir: str):
 
 
 def _texts_of(df, text_cols: List[str]) -> List[str]:
-    from src.detectors.data_level import combined_text
+    from post_train_guard.detectors.common import combined_text
     return [str(t) for t in combined_text(df, text_cols)]
 
 
@@ -111,8 +120,9 @@ def representation(model_path: str, df, max_len: int = 128, batch: int = 64):
     tok, mdl, dev = load_text_classifier(model_dir)
     texts = _texts_of(df, text_cols)
     chunks = []
+    n_batches = (len(texts) + batch - 1) // batch
     with torch.no_grad():
-        for i in range(0, len(texts), batch):
+        for i in _progress(range(0, len(texts), batch), "BERT embed", total=n_batches):
             enc = tok(texts[i:i + batch], padding=True, truncation=True,
                       max_length=max_len, return_tensors="pt").to(dev)
             hs = mdl(**enc).hidden_states[-1]                # (B, T, H)
@@ -144,8 +154,9 @@ def rpp_scores_bert(model_path: str, df, n_perturb: int = 8, sigma: float = 0.15
     emb_layer = mdl.get_input_embeddings()
     texts = _texts_of(df, text_cols)
     out = []
+    n_batches = (len(texts) + batch - 1) // batch
     with torch.no_grad():
-        for i in range(0, len(texts), batch):
+        for i in _progress(range(0, len(texts), batch), f"RPP | BERT x{n_perturb}", total=n_batches):
             enc = tok(texts[i:i + batch], padding=True, truncation=True,
                       max_length=max_len, return_tensors="pt").to(dev)
             ids, amask = enc["input_ids"], enc["attention_mask"]

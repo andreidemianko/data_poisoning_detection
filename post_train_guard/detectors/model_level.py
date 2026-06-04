@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
-from src.detectors.data_level import extract_xy
+from post_train_guard.detectors.common import extract_xy
 
 
 # --------------------------------------------------------------------------- #
@@ -55,6 +55,17 @@ def _softmax(z: np.ndarray) -> np.ndarray:
     return e / e.sum(axis=1, keepdims=True)
 
 
+def _proba(z: np.ndarray) -> np.ndarray:
+    """Вероятности из логитов. Один выходной нейрон (бинарка, sklearn/torch с
+    1-logit) -> сигмоида -> 2 колонки [1-p, p]; иначе softmax. Без этого softmax
+    по одному логиту даёт вырожденные [1.0] (ломало RPP и model_diff на бинарных
+    реконструированных MLP)."""
+    if z.ndim == 2 and z.shape[1] == 1:
+        p = 1.0 / (1.0 + np.exp(-z))
+        return np.hstack([1.0 - p, p])
+    return _softmax(z)
+
+
 def mlp_forward(layers, X: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
     """(representation = last hidden activation, proba). ReLU assumed."""
     h = X.astype(float)
@@ -68,7 +79,7 @@ def mlp_forward(layers, X: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         else:
             logits = z
     repr_ = h if len(layers) >= 2 else logits
-    return repr_, _softmax(logits)
+    return repr_, _proba(logits)
 
 
 def prepare_model(state_dict, dataset) -> Tuple[list, np.ndarray, np.ndarray, str]:
