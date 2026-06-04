@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-
+from .secrets import SecretRegexDetector
 from ..config import AppConfig
 from .base import Detector
 from .pii import PiiRegexDetector, PresidioDetector
@@ -45,6 +45,7 @@ def build_detectors(config: AppConfig) -> DetectorBundle:
     slow_pii: list[Detector] = []
 
     fast_text.append(RegexDetector())
+    fast_text.append(SecretRegexDetector())
     fast_text.append(HomoglyphDetector())
 
     if config.engines.enable_pii_regex:

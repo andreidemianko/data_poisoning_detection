@@ -57,6 +57,65 @@ DEFAULT_REGEX_RULES: list[RegexRule] = [
     # Prompt injection
     # -------------------------------------------------------------------------
     compile_rule(
+        rule_id="prompt.role_boundary_marker",
+        category=Category.PROMPT_INJECTION,
+        subtype="ROLE_BOUNDARY_CONFUSION",
+        severity=Severity.REVIEW,
+        pattern=(
+            r"(?:"
+            r"<\|\s*(?:system|developer|assistant|tool|user)\s*\|>"
+            r"|"
+            r"#{2,}\s*(?:system|developer|assistant|tool|user)\s*:"
+            r"|"
+            r"\bBEGIN\s+(?:SYSTEM|DEVELOPER|ASSISTANT|TOOL|USER)\s+MESSAGE\b"
+            r"|"
+            r"\bEND\s+(?:SYSTEM|DEVELOPER|ASSISTANT|TOOL|USER)\s+MESSAGE\b"
+            r")"
+        ),
+        message="Possible prompt injection role-boundary marker.",
+        confidence=0.8,
+    ),
+    compile_rule(
+        rule_id="prompt.system_prompt_disclosure",
+        category=Category.PROMPT_INJECTION,
+        subtype="SYSTEM_PROMPT_DISCLOSURE",
+        severity=Severity.REVIEW,
+        pattern=(
+            r"(?:"
+            r"(?:reveal|disclose|show|print|return|dump|exfiltrate)\s+"
+            r"(?:the\s+)?"
+            r"(?:system\s+prompt|developer\s+message|hidden\s+instructions|"
+            r"tool\s+instructions|previous\s+messages|confidential\s+prompt)"
+            r"|"
+            r"(?:system\s+prompt|developer\s+message|hidden\s+instructions|"
+            r"tool\s+instructions|previous\s+messages|confidential\s+prompt)\s+"
+            r"(?:must\s+be\s+)?(?:revealed|disclosed|shown|printed|returned|dumped)"
+            r")"
+        ),
+        message="Possible prompt injection attempt to disclose hidden instructions.",
+        confidence=0.9,
+    ),
+    compile_rule(
+        rule_id="prompt.developer_message_override",
+        category=Category.PROMPT_INJECTION,
+        subtype="DEVELOPER_MESSAGE_OVERRIDE",
+        severity=Severity.REVIEW,
+        pattern=(
+            r"(?:"
+            r"(?:override|replace|ignore|bypass)\s+"
+            r"(?:the\s+)?(?:system|developer|assistant|tool)\s+"
+            r"(?:message|instructions|prompt|policy)"
+            r"|"
+            r"(?:act|respond|behave)\s+as\s+"
+            r"(?:the\s+)?(?:system|developer|admin|root)"
+            r"|"
+            r"developer\s+mode"
+            r")"
+        ),
+        message="Possible prompt injection attempt to override role or developer instructions.",
+        confidence=0.85,
+    ),
+    compile_rule(
         rule_id="prompt.ignore_previous_instructions",
         category=Category.PROMPT_INJECTION,
         subtype="IGNORE_PREVIOUS_INSTRUCTIONS",
@@ -288,6 +347,67 @@ DEFAULT_REGEX_RULES: list[RegexRule] = [
         pattern=r"\{\{\s*\d+\s*[*+\-/]\s*\d+\s*\}\}",
         message="Possible template arithmetic expression injection.",
         confidence=0.75,
+    ),
+    compile_rule(
+        rule_id="template.jndi_lookup",
+        category=Category.TEMPLATE_INJECTION,
+        subtype="JNDI_LOOKUP",
+        severity=Severity.BLOCK,
+        pattern=(
+            r"\$\{\s*jndi\s*:\s*"
+            r"(?:ldap|ldaps|rmi|dns|iiop|corba|nis|nds|http|https)\s*://"
+        ),
+        message="Possible JNDI lookup template injection payload.",
+        confidence=0.98,
+    ),
+    compile_rule(
+        rule_id="template.java_runtime_exec",
+        category=Category.TEMPLATE_INJECTION,
+        subtype="JAVA_RUNTIME_EXEC",
+        severity=Severity.BLOCK,
+        pattern=(
+            r"(?:"
+            r"\$\{\s*T\s*\(\s*java\.lang\.Runtime\s*\)"
+            r"\s*\.getRuntime\s*\(\s*\)\s*\.exec\s*\("
+            r"|"
+            r"java\.lang\.Runtime\s*\.getRuntime\s*\(\s*\)\s*\.exec\s*\("
+            r"|"
+            r"Runtime\s*\.getRuntime\s*\(\s*\)\s*\.exec\s*\("
+            r")"
+        ),
+        message="Possible Java runtime execution template payload.",
+        confidence=0.98,
+    ),
+    compile_rule(
+        rule_id="template.jsp_runtime_exec",
+        category=Category.TEMPLATE_INJECTION,
+        subtype="JSP_RUNTIME_EXEC",
+        severity=Severity.BLOCK,
+        pattern=(
+            r"<%\s*=?\s*"
+            r".{0,120}?"
+            r"(?:Runtime\s*\.getRuntime\s*\(\s*\)\s*\.exec|"
+            r"java\.lang\.Runtime\s*\.getRuntime\s*\(\s*\)\s*\.exec)"
+        ),
+        message="Possible JSP runtime execution payload.",
+        confidence=0.98,
+    ),
+    compile_rule(
+        rule_id="template.expression_runtime_exec",
+        category=Category.TEMPLATE_INJECTION,
+        subtype="EXPRESSION_RUNTIME_EXEC",
+        severity=Severity.BLOCK,
+        pattern=(
+            r"(?:"
+            r"\$\{\s*"
+            r".{0,80}?"
+            r"(?:exec\s*\(|popen\s*\(|ProcessBuilder\s*\(|getRuntime\s*\(\s*\))"
+            r".{0,120}?"
+            r"\}"
+            r")"
+        ),
+        message="Possible expression-language runtime execution payload.",
+        confidence=0.9,
     ),
     compile_rule(
         rule_id="template.jinja_function_call",

@@ -20,7 +20,7 @@ class Category(str, Enum):
     Base normalise category
     It's value forward to json/csv
     """
-
+    
     SQLI = "sqli"
     XSS = "xss"
     PROMPT_INJECTION = "prompt_injection"
