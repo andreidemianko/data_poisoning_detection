@@ -111,18 +111,26 @@ credentials/
 *.pth
 *.pt
 *.onnx
-models/
-reports/
 datasets/
-data/
 checkpoints/
 logs/
 runs/
 tb_logs/
 wandb/
-*.csv
 *.xlsx
 *.xls
+
+# data/, models/, reports/ — папки на гите, содержимое нет
+data/*
+!data/.gitkeep
+data/.cli_cache/
+
+models/*
+!models/.gitkeep
+models/.cli_cache/
+
+reports/*
+!reports/.gitkeep
 
 # Temporary files
 *.tmp
