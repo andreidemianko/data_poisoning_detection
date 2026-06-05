@@ -1,0 +1,34 @@
+{
+  "run_id": "076d5ceb",
+  "timestamp": "2026-06-04T00:30:51.743755Z",
+  "dataset_path": "data/bitext_retail_banking/dataset_2.csv",
+  "model_path": "models/model.pt",
+  "overall_status": "failed",
+  "results": [
+    {
+      "name": "Sanity: SQL-like payloads",
+      "category": "sanity",
+      "status": "failed",
+      "passed": false,
+      "details": {
+        "string_columns": [
+          "tags",
+          "instruction",
+          "category",
+          "intent",
+          "response"
+        ],
+        "hit_counts": {
+          "tags": 0,
+          "instruction": 47,
+          "category": 0,
+          "intent": 0,
+          "response": 4978
+        },
+        "hit_ratio": 1.005,
+        "threshold": 0
+      }
+    }
+  ],
+  "metadata": {}
+}

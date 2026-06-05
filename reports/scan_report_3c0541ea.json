@@ -1,0 +1,80 @@
+{
+  "run_id": "3c0541ea",
+  "timestamp": "2026-06-04T00:37:02.955258Z",
+  "dataset_path": "data/taiwan_d2.csv",
+  "model_path": "models/taiwan_d2.pt",
+  "overall_status": "passed",
+  "results": [
+    {
+      "name": "Model: post-train backdoor detection (Spectral + AC + RPP)",
+      "category": "model",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "label_column": "label",
+        "feature_columns": 23,
+        "sil_review": 0.45,
+        "decision_note": "routed on the backdoor signature (a tight, well-separated minority cluster in the model's representation), corroborated by per-detector rankings; these model-level detectors are approximate, blind to label-flips and uncalibrated here, and the threshold is a heuristic -> a finding routes to REVIEW, never an automatic block. The top suspicious rows are always reported for data-level cross-check. Controlled-FPR auto-decisions need conformal calibration + a clean reference.",
+        "n_rows": 30000,
+        "n_classes": 2,
+        "n_layers": 3,
+        "in_features": 23,
+        "flags": {
+          "spectral": 1500,
+          "activation_clustering": 13287,
+          "rpp": 1500,
+          "consensus_ge2": 1241
+        },
+        "flag_fraction": {
+          "spectral": 0.05,
+          "activation_clustering": 0.4429,
+          "rpp": 0.05,
+          "consensus_ge2": 0.0414
+        },
+        "backdoor_silhouette": 0.2883,
+        "activation_clustering_detail": {
+          "max_minority_silhouette": 0.2883,
+          "n_gated_classes": 2,
+          "gated_fraction": 0.4429
+        },
+        "top_suspicious_rows": [
+          24050,
+          20226,
+          1831,
+          385,
+          2593,
+          13148,
+          7676,
+          24135,
+          24392,
+          1073,
+          27791,
+          20278,
+          27564,
+          28782,
+          28716,
+          23041,
+          2598,
+          2560,
+          28852,
+          29610
+        ],
+        "contamination": 0.05
+      }
+    },
+    {
+      "name": "Model: weight anomalies",
+      "category": "model",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "total_tensors": 6,
+        "nan_params": 0,
+        "inf_params": 0,
+        "max_abs": 0.5732553601264954,
+        "max_abs_threshold": 1000000.0
+      }
+    }
+  ],
+  "metadata": {}
+}

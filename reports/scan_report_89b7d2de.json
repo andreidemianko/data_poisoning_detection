@@ -1,0 +1,32 @@
+{
+  "run_id": "89b7d2de",
+  "timestamp": "2026-06-03T23:44:17.798296Z",
+  "dataset_path": "data/bitext_retail_banking/dataset_3.csv",
+  "model_path": "models/bitext_retail_banking/distilbert_dataset_3/model.safetensors",
+  "overall_status": "passed",
+  "results": [
+    {
+      "name": "Model: post-train backdoor detection (Spectral + AC + RPP)",
+      "category": "model",
+      "status": "skipped",
+      "passed": true,
+      "details": {
+        "reason": "no label column (need declared labels for per-class model analysis)"
+      }
+    },
+    {
+      "name": "Model: weight anomalies",
+      "category": "model",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "total_tensors": 104,
+        "nan_params": 0,
+        "inf_params": 0,
+        "max_abs": 9.962076187133789,
+        "max_abs_threshold": 1000000.0
+      }
+    }
+  ],
+  "metadata": {}
+}

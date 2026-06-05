@@ -153,3 +153,7 @@ Thumbs.db
 .VSCodeCounter/
 chrome-user-data/
 
+# Scan artifacts and archives (generated, not source)
+reports/
+*.zip
+
