@@ -1,0 +1,81 @@
+{
+  "run_id": "841c963f",
+  "timestamp": "2026-06-03T07:07:36.183931Z",
+  "dataset_path": "D:\\game\\PycharmProjects\\pythonProject\\Scaner_posoning\\Scaner_posoning\\Scaner_posoning\\security_case_datasets\\banking77\\dataset_1.parquet",
+  "model_path": "D:\\game\\PycharmProjects\\pythonProject\\prod\\data_poisoning_detection-main\\models\\model.pt",
+  "overall_status": "passed",
+  "results": [
+    {
+      "name": "Dataset Guard: monolith security scan",
+      "category": "sanity",
+      "status": "passed",
+      "passed": true,
+      "details": {
+        "decision": "ALLOW",
+        "risk_score": 0.0437,
+        "finding_counts": {
+          "quality": 1
+        },
+        "file_count": 1,
+        "error_count": 0,
+        "dataset_guard_report": {
+          "decision": "ALLOW",
+          "risk_score": 0.0437,
+          "finding_counts": {
+            "quality": 1
+          },
+          "files": [
+            {
+              "file": {
+                "path": "D:\\game\\PycharmProjects\\pythonProject\\Scaner_posoning\\Scaner_posoning\\Scaner_posoning\\security_case_datasets\\banking77\\dataset_1.parquet",
+                "source": "local",
+                "dataset": "banking77",
+                "version": "dataset_1",
+                "suffix": ".parquet"
+              },
+              "decision": "ALLOW",
+              "risk_score": 0.0437,
+              "rows": 10003,
+              "columns": [
+                "text",
+                "label"
+              ],
+              "finding_counts": {
+                "quality": 1
+              },
+              "errors": [],
+              "top_findings": [
+                {
+                  "category": "quality",
+                  "subtype": "RARE_TOKEN_LABEL_CORRELATION",
+                  "rule_id": "poisoning.rare_token_label_correlation",
+                  "severity": "REVIEW",
+                  "message": "Rare token is strongly correlated with label '13'.",
+                  "detector": "poisoning_profiler",
+                  "confidence": 1.0,
+                  "column": "label",
+                  "row_index": null,
+                  "value_sha256": null,
+                  "metadata": {
+                    "label_column": "label",
+                    "token_sha256": "afafb16ac47b9b3da9825787ce354896fce376ae6cb1b5a157fa682a122011a1",
+                    "token_count": 3,
+                    "top_label": "13",
+                    "top_label_count": 3,
+                    "top_ratio": 1.0,
+                    "threshold": 0.95
+                  }
+                }
+              ],
+              "suppressed_count": 0
+            }
+          ],
+          "metadata": {
+            "file_count": 1
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {}
+}
