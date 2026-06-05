@@ -1,0 +1,18 @@
+.git
+.gitignore
+.venv
+.idea
+__pycache__
+*.pyc
+*.pyo
+
+# данные и модели монтируются через volume, не копируются в образ
+data/
+models/
+reports/
+
+# мусор
+drafts/
+Notes/
+*.json
+packege.json

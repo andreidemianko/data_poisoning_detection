@@ -1,0 +1,9 @@
+services:
+  scanner:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    # Пример запуска через docker compose run:
+    #   docker compose run --rm scanner scan --dataset data/train.csv --model models/model.pt
