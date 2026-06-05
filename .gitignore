@@ -157,3 +157,7 @@ chrome-user-data/
 reports/
 *.zip
 
+# Бенч-результаты post_train_guard трекаем намеренно (маленькие, headline-метрики),
+# несмотря на глобальный *.csv выше
+!post_train_guard/benchmarks/*.csv
+

@@ -73,6 +73,40 @@ def top_indices(scores: np.ndarray, n: int = 20) -> List[int]:
     return np.argsort(scores)[::-1][: min(n, len(scores))].astype(int).tolist()
 
 
+def permutation_flag(stat_fn, reps, labels, K: int = 15, q: float = 95.0,
+                     margin: float = 0.0, floor=None, seed: int = 1):
+    """Самокалиброванный гейт под датасет (без эталона): сравнить реальную
+    статистику с НУЛЁМ из перемешанных меток (stat_fn(reps, shuffled_labels)).
+    Флаг, если real > перцентиль(null, q) + margin [и real >= floor, если задан].
+    Перестановка ломает внутриклассовую структуру отравления, оставляя
+    «естественную» как фон -> отделяет аномалию от природной структуры."""
+    real = float(stat_fn(reps, labels))
+    rng = np.random.RandomState(seed)
+    lab = np.asarray(labels)
+    null = np.array([float(stat_fn(reps, rng.permutation(lab))) for _ in range(K)])
+    thr = float(np.percentile(null, q)) + margin
+    flagged = (real > thr) and (floor is None or real >= floor)
+    return bool(flagged), round(real, 3), round(thr, 3)
+
+
+def cluster_gap_flag(scores, min_frac: float = 0.03, max_frac: float = 0.40,
+                     sep: float = 1.2, seed: int = 0):
+    """Self-contained гейт для 1-D скоров БЕЗ меток (RPP): 2-means, флаг если есть
+    обособленный кластер-МЕНЬШИНСТВО на высокой стороне (доля в [min,max]) с
+    разделением центров sep (в единицах within-std). Консервативно."""
+    from sklearn.cluster import KMeans
+    x = np.asarray(scores, dtype=float).reshape(-1, 1)
+    if len(x) < 20:
+        return False, 0.0, 0.0
+    lab = KMeans(2, n_init=5, random_state=seed).fit_predict(x)
+    m0, m1 = float(x[lab == 0].mean()), float(x[lab == 1].mean())
+    hi = 0 if m0 > m1 else 1
+    frac = float((lab == hi).mean())
+    sd = float(np.sqrt((x[lab == hi].std() ** 2 + x[lab != hi].std() ** 2) / 2 + 1e-12))
+    d = abs(m0 - m1) / sd
+    return bool(min_frac <= frac <= max_frac and d >= sep), round(frac, 3), round(d, 3)
+
+
 def bootstrap_upper_quantile(x: np.ndarray, q: float, n_boot: int = 200,
                              ci: float = 0.95, seed: int = 0) -> float:
     """Верхняя CI-граница q-квантиля по бутстрапу. Для МАЛЫХ чистых выборок это
