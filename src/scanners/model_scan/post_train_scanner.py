@@ -18,7 +18,7 @@ class PostTrainGuardScanner(BaseScanner):
     entire ensemble into the project is exactly this one file.
     """
 
-    name = "Post-Train Guard: model-level ensemble (Spectral / Activation Clustering / RPP)"
+    name = "Post-Train Guard: model-level ensemble (SPECTRE / Activation Clustering / RPP)"
     category = ScannerCategory.MODEL
 
     # Опора для режима 2 (необязательная). Заполняется из CLI (см. src/cli.py),

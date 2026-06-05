@@ -1,6 +1,6 @@
 """
 Active registry of the POST-TRAIN ensemble: three model-level methods —
-Spectral Signatures, Activation Clustering, RPP — each applied to tabular models
+SPECTRE (robust Spectral Signatures + QUE), Activation Clustering, RPP — each applied to tabular models
 (reconstructed MLP) and to fine-tuned BERT (embeddings / input-embedding noise).
 
 This is the "ensemble of three" the gate runs. The data-level / consensus
@@ -21,6 +21,7 @@ from post_train_guard.detectors import common as cm
 from post_train_guard.detectors import model_diff as md
 from post_train_guard.detectors import model_level as ml
 from post_train_guard.detectors import nlp_model_level as nlp
+from post_train_guard.detectors import spectre as spct
 from post_train_guard.models import Finding, FindingStatus
 
 DEFAULT_CONFIG: Dict[str, float] = {
@@ -119,7 +120,7 @@ def _tab_clean_reps(inp, layers, n_features):
 
 # ---- Post-train, tabular (reconstructs an MLP from the state_dict) ---------- #
 def check_spectral(inp: ScanInput) -> Finding:
-    n, c = "Spectral Signatures (model)", "tabular-model"
+    n, c = "SPECTRE (model, robust whitening + QUE)", "tabular-model"
     try:
         layers, X, y, label_col = ml.prepare_model(inp.model_state, inp.dataset)
     except ValueError as exc:
@@ -133,14 +134,14 @@ def check_spectral(inp: ScanInput) -> Finding:
         try:
             reps_c, yc, _ = _tab_clean_reps(inp, layers, X.shape[1])
             comb = np.vstack([reps_c, repr_]); yy = np.concatenate([yc, y])
-            sa = ml.spectral_scores(comb, yy)
+            sa = spct.spectre_scores(comb, yy)
             return from_scores_calibrated(n, c, sa[:len(reps_c)], sa[len(reps_c):], inp.config,
-                                          "spectral-outlier rows",
+                                          "SPECTRE-outlier rows",
                                           {"label_column": label_col, "n_rows": len(X), "n_clean": len(reps_c)})
         except ValueError:
             pass                                        # калибровка неприменима -> триаж ниже
-    s = ml.spectral_scores(repr_, y)
-    return from_scores(n, c, s, inp.config, "spectral-outlier rows", "no spectral outliers",
+    s = spct.spectre_scores(repr_, y)
+    return from_scores(n, c, s, inp.config, "SPECTRE-outlier rows", "no SPECTRE outliers",
                        {"label_column": label_col, "n_rows": len(X)})
 
 
@@ -218,23 +219,23 @@ def _nlp_repr_check(inp, name, fn_on_repr):
 
 
 def check_nlp_spectral(inp: ScanInput) -> Finding:
-    n = "Spectral on BERT embeddings"
+    n = "SPECTRE on BERT embeddings"
 
     def on_repr(emb, y, label_col, tcols):
         if inp.clean_data is not None:                  # режим 2: калибровка по чистому сэмплу
             try:
                 emb_c, yc, _, _ = nlp.representation(inp.model_path, inp.clean_data)
                 comb = np.vstack([emb_c, emb]); yy = np.concatenate([yc, y])
-                sa = ml.spectral_scores(comb, yy)
+                sa = spct.spectre_scores(comb, yy)
                 return from_scores_calibrated(n, "nlp-model", sa[:len(emb_c)], sa[len(emb_c):], inp.config,
-                                              "spectral-outlier rows in BERT space",
+                                              "SPECTRE-outlier rows in BERT space",
                                               {"text_columns": tcols, "label_column": label_col,
                                                "n_rows": len(emb), "n_clean": len(emb_c)})
             except ValueError:
                 pass
-        s = ml.spectral_scores(emb, y)
-        return from_scores(n, "nlp-model", s, inp.config, "spectral-outlier rows in BERT space",
-                           "no spectral outliers in BERT space",
+        s = spct.spectre_scores(emb, y)
+        return from_scores(n, "nlp-model", s, inp.config, "SPECTRE-outlier rows in BERT space",
+                           "no SPECTRE outliers in BERT space",
                            {"text_columns": tcols, "label_column": label_col, "n_rows": len(emb)})
     return _nlp_repr_check(inp, n, on_repr)
 
