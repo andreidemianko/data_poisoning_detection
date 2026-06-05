@@ -1,0 +1,7 @@
+services:
+  scanner:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports

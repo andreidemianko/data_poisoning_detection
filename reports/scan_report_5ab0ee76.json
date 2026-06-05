@@ -1,9 +1,0 @@
-{
-  "run_id": "5ab0ee76",
-  "timestamp": "2026-06-02T09:08:39.739543Z",
-  "dataset_path": "/Users/andreidemianko/Working/sirius_mlSec/data_poisoning_detection/data/sample.csv",
-  "model_path": "models/sample.pt",
-  "overall_status": "passed",
-  "results": [],
-  "metadata": {}
-}
