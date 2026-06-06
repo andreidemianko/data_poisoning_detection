@@ -38,10 +38,45 @@ def scan(
         False,
         help="Продолжать выполнение при ошибках (актуально для only/all)",
     ),
+    reference: str = typer.Option(
+        None,
+        help="Режим 2: опорная модель (NLP — папка/safetensors; табличный с --target — CSV чистой версии)",
+    ),
+    clean_data: str = typer.Option(
+        None,
+        help="Режим 2: чистый сэмпл -> калибровка (NLP). В табличном режиме берётся из --reference",
+    ),
+    target: str = typer.Option(
+        None,
+        help="Табличный режим: колонка-таргет -> обучить MLP (общая стандартизация) в одном scan",
+    ),
+    drop: str = typer.Option(
+        "",
+        help="Табличный режим: служебные колонки через запятую",
+    ),
 ):
+    ref_model, clean = reference, clean_data
+    if target:  # табличный режим: обучить модель(и) с ОБЩЕЙ стандартизацией -> обычный пайплайн
+        from pathlib import Path as _P
+        from tabular_prep import prepare
+        nm = f"{_P(dataset).parent.name}_{_P(dataset).stem}".strip("_") or "case"
+        prepared = prepare(dataset, target,
+                           [d.strip() for d in drop.split(",") if d.strip()],
+                           clean_csv=reference, name=nm)
+        dataset, model = prepared["dataset"], prepared["model"]
+        ref_model, clean = prepared["reference_model"], prepared["clean_data"]
+        print("[tabular] обучен MLP (общая стандартизация)"
+              + (" + опорная модель + калибровка" if ref_model else " (режим 1, триаж)"))
+
     discover_scanners()
     plan = _build_plan(mode.lower(), only.lower(), continue_on_fail)
     scanners = registry.build(plan.categories)
+    # Прокидываем опору режима 2 в адаптер post-train (без изменения ядра/ScanContext).
+    for s in scanners:
+        if hasattr(s, "reference_model_path"):
+            s.reference_model_path = ref_model
+        if hasattr(s, "clean_data_path"):
+            s.clean_data_path = clean
     pipeline = SecurityPipeline(scanners)
 
     report = pipeline.execute(dataset, model, plan)

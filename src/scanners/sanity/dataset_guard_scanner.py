@@ -108,7 +108,7 @@ class DatasetGuardScanner(BaseScanner):
                     "columns": item.get("columns"),
                     "finding_counts": item.get("finding_counts"),
                     "errors": item.get("errors", []),
-                    "top_findings": findings[:20],
+                    "top_findings": findings[:],
                     "suppressed_count": item.get("metadata", {})
                     .get("suppression", {})
                     .get("suppressed_count", 0),

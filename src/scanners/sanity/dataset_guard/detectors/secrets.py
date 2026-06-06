@@ -138,6 +138,53 @@ class SecretRegexDetector(Detector):
 
     name = "secret_regex"
 
+    @staticmethod
+    def _is_placeholder_secret_match(value: str) -> bool:
+        """
+        Suppress generic API-key findings on placeholders and env-var names.
+
+        Examples to suppress:
+            API_KEY
+            TRELLO_API_KEY
+            YOUR_API_KEY
+            <API_KEY>
+            ${API_KEY}
+            process.env.API_KEY
+        """
+
+        raw = str(value).strip()
+        normalized = raw.strip("'\"`<>[](){} ").strip()
+
+        placeholder_markers = {
+            "API_KEY",
+            "YOUR_API_KEY",
+            "TRELLO_API_KEY",
+            "ACCESS_TOKEN",
+            "YOUR_ACCESS_TOKEN",
+            "SECRET_KEY",
+            "CLIENT_SECRET",
+            "TOKEN",
+        }
+
+        upper = normalized.upper()
+
+        if upper in placeholder_markers:
+            return True
+
+        if upper.endswith("_API_KEY") or upper.endswith("_ACCESS_TOKEN") or upper.endswith("_SECRET"):
+            return True
+
+        if upper.startswith("YOUR_") or upper.startswith("EXAMPLE_") or upper.startswith("DUMMY_"):
+            return True
+
+        if "PROCESS.ENV." in upper:
+            return True
+
+        if "${" in raw and "}" in raw:
+            return True
+
+        return False
+
     def is_available(self) -> bool:
         return True
 
@@ -163,6 +210,10 @@ class SecretRegexDetector(Detector):
 
             if not match:
                 continue
+
+            if rule.rule_id == "secret.generic_api_key_assignment":
+                if self._is_placeholder_secret_match(match.group(0)):
+                    continue
 
             findings.append(
                 Finding(
