@@ -155,7 +155,7 @@ class PiiRegexDetector(Detector):
                 )
             )
 
-        if self._has_luhn_valid_card(text):
+        if self._has_luhn_valid_card(text, context=context):
             findings.append(
                 Finding(
                     category=Category.PII,
@@ -171,21 +171,158 @@ class PiiRegexDetector(Detector):
 
         return findings
 
-    def _has_luhn_valid_card(self, text: str) -> bool:
+    def _has_luhn_valid_card(self, text: str, context: dict[str, Any] | None = None) -> bool:
         """
         Return True if text contains a credit-card-like number passing Luhn check.
+
+        Suppresses common false positives:
+        - hash/id columns;
+        - Twitter/X status IDs;
+        - HTML quote/thread/post IDs;
+        - long hexadecimal identifiers;
+        - numbers embedded inside larger alphanumeric tokens.
         """
 
+        column = None
+        if context:
+            column = context.get("column")
+
         for match in self.CREDIT_CARD_LIKE.finditer(text):
-            digits = re.sub(r"\D", "", match.group(0))
+            match_text = match.group(0)
+            digits = re.sub(r"\D", "", match_text)
 
             if not 13 <= len(digits) <= 19:
+                continue
+
+            if self._should_suppress_credit_card_candidate(
+                text=text,
+                match_text=match_text,
+                start=match.start(),
+                end=match.end(),
+                column=str(column) if column is not None else None,
+            ):
                 continue
 
             if self._luhn_check(digits):
                 return True
 
         return False
+
+    @classmethod
+    def _should_suppress_credit_card_candidate(
+        cls,
+        text: str,
+        match_text: str,
+        start: int,
+        end: int,
+        column: str | None,
+    ) -> bool:
+        digits = cls._digits_only(match_text)
+
+        # Credit cards are normally 13-19 digits.
+        if len(digits) < 13 or len(digits) > 19:
+            return True
+
+        # ID/hash columns create many false positives.
+        if cls._is_likely_identifier_column(column):
+            return True
+
+        # Long SHA-like / hash-like values are not cards.
+        token_start = start
+        token_end = end
+
+        while token_start > 0 and text[token_start - 1].isalnum():
+            token_start -= 1
+
+        while token_end < len(text) and text[token_end].isalnum():
+            token_end += 1
+
+        full_token = text[token_start:token_end]
+
+        if cls._is_hex_like(full_token):
+            return True
+
+        # URLs, social status IDs, post/thread IDs are not cards.
+        if cls._is_likely_url_or_social_id(text, start, end):
+            return True
+
+        # If candidate is embedded inside larger alphanumeric token, suppress.
+        before = text[start - 1] if start > 0 else ""
+        after = text[end] if end < len(text) else ""
+
+        if before.isalnum() or after.isalnum():
+            return True
+
+        return False
+
+    @staticmethod
+    def _digits_only(value: str) -> str:
+        return "".join(ch for ch in value if ch.isdigit())
+
+    @staticmethod
+    def _is_hex_like(value: str) -> bool:
+        compact = value.strip().lower()
+
+        if len(compact) >= 32 and all(ch in "0123456789abcdef" for ch in compact):
+            return True
+
+        return False
+
+    @staticmethod
+    def _is_likely_identifier_column(column: str | None) -> bool:
+        if not column:
+            return False
+
+        name = str(column).lower()
+
+        return (
+            name in {
+                "id",
+                "pid",
+                "thread",
+                "run_id",
+                "trace_id",
+                "episode",
+                "uid",
+                "uuid",
+                "hash",
+                "sha",
+                "sha1",
+                "sha256",
+                "md5",
+            }
+            or name.endswith("_id")
+            or name.endswith("_hash")
+            or name.endswith("_sha")
+            or name.endswith("_sha256")
+        )
+
+    @staticmethod
+    def _is_likely_url_or_social_id(text: str, start: int, end: int) -> bool:
+        left = text[max(0, start - 120):start].lower()
+        right = text[end:min(len(text), end + 80)].lower()
+        context = left + text[start:end].lower() + right
+
+        markers = (
+            "://",
+            "http://",
+            "https://",
+            "x.com/",
+            "twitter.com/",
+            "/status/",
+            "status/",
+            "tweet",
+            "href=",
+            "#p",
+            "quotelink",
+            "thread",
+            "pid",
+            "post",
+            "board",
+            "attachment",
+        )
+
+        return any(marker in context for marker in markers)
 
     @staticmethod
     def _luhn_check(digits: str) -> bool:

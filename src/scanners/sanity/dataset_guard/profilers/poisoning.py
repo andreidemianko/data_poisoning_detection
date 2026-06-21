@@ -1,5 +1,7 @@
 from __future__ import annotations
+import json
 
+import numpy as np
 import math
 import re
 from collections import Counter, defaultdict
@@ -72,6 +74,8 @@ class PoisoningProfiler(Profiler):
         """
         Run all poisoning and quality heuristics for a dataframe.
         """
+
+        frame = self._sanitize_frame_for_hashing(frame)
 
         findings: list[Finding] = []
 
@@ -359,9 +363,9 @@ class PoisoningProfiler(Profiler):
         token_to_labels: dict[str, Counter[Any]] = defaultdict(Counter)
 
         for _, row in frame.iterrows():
-            label = row.get(label_column.name)
+            label = self._hashable_value(row.get(label_column.name))
 
-            if pd.isna(label):
+            if label is None:
                 continue
 
             row_tokens: set[str] = set()
@@ -424,10 +428,12 @@ class PoisoningProfiler(Profiler):
 
         for column in frame.columns:
             column_name = str(column)
-            series = frame[column].dropna()
 
+            series = frame[column].dropna()
             if series.empty:
                 continue
+
+            series = series.map(self._hashable_value)
 
             unique_count = int(series.nunique(dropna=True))
             non_null_count = int(series.shape[0])
@@ -483,3 +489,41 @@ class PoisoningProfiler(Profiler):
         from ..utils import value_fingerprint
 
         return value_fingerprint(token)
+
+    @staticmethod
+    def _hashable_value(value: Any) -> Any:
+        """
+        Convert nested/list/ndarray values into stable hashable representation
+        for Counter/set/value_counts/grouping logic.
+        """
+
+        if value is None:
+            return None
+
+        if isinstance(value, float) and math.isnan(value):
+            return None
+
+        if isinstance(value, np.ndarray):
+            return json.dumps(value.tolist(), ensure_ascii=False, sort_keys=True, default=str)
+
+        if isinstance(value, (list, tuple, set)):
+            return json.dumps(list(value), ensure_ascii=False, sort_keys=True, default=str)
+
+        if isinstance(value, dict):
+            return json.dumps(value, ensure_ascii=False, sort_keys=True, default=str)
+
+        return value
+
+    @classmethod
+    def _sanitize_frame_for_hashing(cls, frame: pd.DataFrame) -> pd.DataFrame:
+        """
+        Convert unhashable object values to stable strings before profiler checks.
+        """
+
+        safe = frame.copy()
+
+        for column in safe.columns:
+            if pd.api.types.is_object_dtype(safe[column]) or pd.api.types.is_string_dtype(safe[column]):
+                safe[column] = safe[column].map(cls._hashable_value)
+
+        return safe

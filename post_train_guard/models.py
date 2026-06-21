@@ -41,6 +41,7 @@ class Finding:
     verdict: str = ""                   # человекочитаемый итог
     details: Dict[str, Any] = field(default_factory=dict)
     advisory: bool = False              # True = триаж без опоры (не вердикт, не ведёт решение)
+    role: str = ""                      # "primary" -> приоритетный решатель режима 1 (AC)
 
     def as_dict(self) -> Dict[str, Any]:
         return {
@@ -49,6 +50,7 @@ class Finding:
             "status": self.status.value,
             "verdict": self.verdict,
             "advisory": self.advisory,
+            "role": self.role,
             "details": self.details,
         }
 
@@ -68,8 +70,14 @@ class PostTrainReport:
         2) иначе, если есть калиброванные суждения (не advisory, вынесли PASSED/REVIEW
            со своей опорой — напр. model_diff при старой модели) — решает ХУДШИЙ
            среди них; advisory-REVIEW идут как приложенные строки, не вето;
-        3) иначе (только триаж, режим 1) — как раньше: худший среди всех.
+        3) иначе (режим 1, без опоры) — ПРИОРИТЕТ AC: решают только ГОЛОСУЮЩИЕ методы
+           с самодостаточным гейтом — AC (role="primary") и RPP (role="corroborator"),
+           оба чистые на эталоне. REVIEW, если любой из них дал REVIEW; иначе ALLOW.
+           SPECTRE (role="advisory") НЕ голосует — его self-гейт шумит на чистом (ловит
+           природную структуру классов) — он лишь ранжирует строки на просмотр. Так
+           режим 1 пропускает относительно чистое и не ревьюит всё подряд.
         """
+        VOTERS = ("primary", "corroborator")
         if any(f.status == FindingStatus.BLOCK for f in findings):
             worst = 3
         else:
@@ -78,7 +86,12 @@ class PostTrainReport:
             if verdict:
                 worst = max(_SEVERITY[f.status] for f in verdict)
             else:
-                worst = max((_SEVERITY[f.status] for f in findings), default=0)
+                voters = [f for f in findings if f.role in VOTERS
+                          and f.status in (FindingStatus.PASSED, FindingStatus.REVIEW)]
+                if voters:
+                    worst = 2 if any(f.status == FindingStatus.REVIEW for f in voters) else 0
+                else:
+                    worst = max((_SEVERITY[f.status] for f in findings), default=0)
         decision = (Decision.BLOCK if worst == 3
                     else Decision.REVIEW if worst == 2
                     else Decision.ALLOW)
