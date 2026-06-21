@@ -6,6 +6,7 @@ from typing import Any, Dict, List
 
 from src.scanners.base import ScanResult, ScanStatus
 from src.core.loaders import project_root
+from src.core.decision import decide
 
 
 @dataclass
@@ -62,11 +63,16 @@ def build_report(run_id: str, dataset_path: str, model_path: str, results: List[
     except ValueError:
         dataset_rel = str(dataset_path_obj)
         model_rel = str(model_path_obj)
-    overall_status = ScanStatus.PASSED
-    for result in results:
-        if result.status == ScanStatus.FAILED:
-            overall_status = ScanStatus.FAILED
-            break
+
+    final = decide(results)
+
+    if final.decision == "BLOCK":
+        overall_status = ScanStatus.FAILED
+    elif final.decision == "REVIEW":
+        overall_status = ScanStatus.HAND_CHECK
+    else:
+        overall_status = ScanStatus.PASSED
+
     return ScanReport(
         run_id=run_id,
         timestamp=datetime.utcnow().isoformat() + "Z",
@@ -74,4 +80,7 @@ def build_report(run_id: str, dataset_path: str, model_path: str, results: List[
         model_path=model_rel,
         results=results,
         overall_status=overall_status,
+        metadata={
+            "final_decision": final.as_dict(),
+        },
     )
